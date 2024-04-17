@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Completed Tasks - EightyHD</title>
+</head>
+<body>
+    <h1>Completed Tasks</h1>
+    <a href="/">Back to Task List</a>
+    <ul>
+        {% for task in completed %}
+        <li>{{ task.task }} - {{ task.reward }} Points (Completed on: {{ task.complete_date.strftime('%Y-%m-%d %H:%M') }})</li>
+        {% endfor %}
+    </ul>
+</body>
+</html>

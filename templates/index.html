@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EightyHD Task Manager</title>
+</head>
+<body>
+    <h1>Task List</h1>
+    <h2>Total Points: {{ total_points }}</h2>
+    <a href="/completed">View Completed Tasks</a>
+    <form action="/add" method="post">
+        <input type="text" name="task" placeholder="Task Description" required>
+        <input type="number" name="reward" placeholder="Reward Points" required>
+        <input type="date" name="expiration_date" placeholder="Expiration Date (optional)">
+        <select name="task_type">
+            <option value="single">Single</option>
+            <option value="recurring">Recurring</option>
+        </select>
+        <button type="submit">Add Task</button>
+    </form>
+    <h3>Add Completed Task</h3>
+    <form action="/add-completed" method="post">
+        <input type="text" name="task" placeholder="Task Description" required>
+        <input type="number" name="reward" placeholder="Reward Points" required>
+        <button type="submit">Add Completed Task</button>
+    </form>
+    <ul>
+        {% for bounty in bounties %}
+        <li>{{ bounty.task }} ({{ bounty.reward }} Points) - <a href="/complete/{{ bounty.id }}">Complete</a></li>
+        {% endfor %}
+    </ul>
+</body>
+</html>
