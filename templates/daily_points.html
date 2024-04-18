@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Daily Points</title>
+</head>
+<body>
+    <h1>Daily Points Earned</h1>
+    <ul>
+        {% for day, total_points in points %}
+        <li>{{ day.strftime('%Y-%m-%d') }}: {{ total_points }} Points</li>
+        {% endfor %}
+    </ul>
+    <a href="/">Back to Home</a>
+</body>
+</html>

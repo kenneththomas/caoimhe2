@@ -4,9 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>EightyHD Task Manager</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='default.css') }}">
 </head>
 <body>
-    <h1>Task List</h1>
+    <header>
+        <!--img src="{{ url_for('static', filename='images/logo1.png') }}" alt="EightyHD Logo"-->
+    </header>
+    <h1>EightyHD Dashboard</h1>
     <h2>Total Points: {{ total_points }}</h2>
     <a href="/completed">View Completed Tasks</a>
     <form action="/add" method="post">
@@ -25,10 +29,21 @@
         <input type="number" name="reward" placeholder="Reward Points" required>
         <button type="submit">Add Completed Task</button>
     </form>
+    <h3>Recurring Tasks</h3>
     <ul>
-        {% for bounty in bounties %}
+        {% for bounty in recurring_bounties %}
+        <li>{{ bounty.task }} ({{ bounty.reward }} Points) - <a href="/complete/{{ bounty.id }}">Complete</a></li>
+        {% endfor %}
+    </ul>
+
+    <h3>Single Tasks</h3>
+    <ul>
+        {% for bounty in single_bounties %}
         <li>{{ bounty.task }} ({{ bounty.reward }} Points) - <a href="/complete/{{ bounty.id }}">Complete</a></li>
         {% endfor %}
     </ul>
 </body>
+<footer>
+    <small>EightyHD 0.1</small>
+</footer>
 </html>

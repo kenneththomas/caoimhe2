@@ -6,3 +6,7 @@
 - get_total_points tells me how many points i have
 - adhoc entry
 - gitignore the db
+- run on port 5009 and on local network
+- split up completed tasks and recurring tasks
+- placeholder in index.html for logo
+- started daily points page
