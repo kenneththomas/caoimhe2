@@ -1,5 +1,9 @@
 # releasenotes
 
+## 0.2.1
+- more caoimhe rebranding
+- use local time instead of utc
+
 ## 0.2
 - chart
 - some caoimhe rebranding

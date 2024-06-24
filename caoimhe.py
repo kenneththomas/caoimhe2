@@ -5,7 +5,7 @@ from dateutil import parser
 from sqlalchemy import func, Date
 
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///eightyhd.db'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///caoimhe.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(app)
 
@@ -13,7 +13,7 @@ class Bounties(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     task = db.Column(db.String(150), nullable=False)
     reward = db.Column(db.Integer, nullable=False)
-    entry_date = db.Column(db.DateTime, default=datetime.utcnow)
+    entry_date = db.Column(db.DateTime, default=datetime.now)
     expiration_date = db.Column(db.DateTime, nullable=True)
     task_type = db.Column(db.String(50), nullable=False) # 'single' or 'recurring'
     status = db.Column(db.String(50), nullable=False) # 'pending', 'completed'
@@ -22,7 +22,7 @@ class Completed(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     task = db.Column(db.String(150), nullable=False)
     reward = db.Column(db.Integer, nullable=False)
-    complete_date = db.Column(db.DateTime, default=datetime.utcnow)
+    complete_date = db.Column(db.DateTime, default=datetime.now)
 
 @app.route('/')
 def index():
@@ -73,7 +73,7 @@ def add_completed():
 
 @app.route('/daily-points')
 def daily_points():
-    today = datetime.utcnow().date()
+    today = datetime.now().date()
     seven_days_ago = today - timedelta(days=7)
 
     # Query to sum points for the last 7 days, grouped by day
@@ -97,7 +97,7 @@ def daily_points():
 @app.route('/point-balance-data')
 def point_balance_data():
     # Get data for the last 30 days
-    end_date = datetime.utcnow().date()
+    end_date = datetime.now().date()
     start_date = end_date - timedelta(days=29)
 
     # Query to get daily point balance
