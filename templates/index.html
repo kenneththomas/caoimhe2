@@ -3,14 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>EightyHD Task Manager</title>
+    <title>Caoimhe Task Manager</title>
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='default.css') }}">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-date-fns"></script>
+    <script src="{{ url_for('static', filename='pbd.js') }}"></script>
 </head>
 <body>
     <header>
-        <!--img src="{{ url_for('static', filename='images/logo1.png') }}" alt="EightyHD Logo"-->
+        <!--img src="{{ url_for('static', filename='images/logo1.png') }}" alt="Caoimhe Logo"-->
     </header>
-    <h1>EightyHD Dashboard</h1>
+    <h1>Caoimhe Dashboard</h1>
     <h2>Total Points: {{ total_points }}</h2>
     <a href="/completed">View Completed Tasks</a>
     <form action="/add" method="post">
@@ -42,8 +45,13 @@
         <li>{{ bounty.task }} ({{ bounty.reward }} Points) - <a href="/complete/{{ bounty.id }}">Complete</a></li>
         {% endfor %}
     </ul>
+
+    <div>
+        <h3>Point Balance Chart</h3>
+        <canvas id="pointBalanceChart" width="400" height="200"></canvas>
+    </div>
 </body>
 <footer>
-    <small>EightyHD 0.1</small>
+    <small>Caoimhe 0.2</small>
 </footer>
 </html>

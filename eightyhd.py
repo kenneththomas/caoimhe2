@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, redirect, url_for
+from flask import Flask, render_template, request, redirect, url_for, jsonify
 from flask_sqlalchemy import SQLAlchemy
 from datetime import datetime, timedelta
 from dateutil import parser
@@ -26,7 +26,6 @@ class Completed(db.Model):
 
 @app.route('/')
 def index():
-    # Show all bounties
     recurring_bounties = Bounties.query.filter_by(status='pending', task_type='recurring').all()
     single_bounties = Bounties.query.filter_by(status='pending', task_type='single').all()
     total_points = get_total_points()
@@ -94,6 +93,34 @@ def daily_points():
     sorted_days_points = sorted((datetime.strptime(key, '%Y-%m-%d').date() if isinstance(key, str) else key, value) for key, value in days_points.items())
 
     return render_template('daily_points.html', points=sorted_days_points)
+
+@app.route('/point-balance-data')
+def point_balance_data():
+    # Get data for the last 30 days
+    end_date = datetime.utcnow().date()
+    start_date = end_date - timedelta(days=29)
+
+    # Query to get daily point balance
+    daily_points = db.session.query(
+        func.date(Completed.complete_date).label('date'),
+        func.sum(Completed.reward).label('points')
+    ).filter(Completed.complete_date >= start_date).group_by(func.date(Completed.complete_date)).all()
+
+    # Create a dictionary with all dates and initialize points to 0
+    date_range = {(start_date + timedelta(days=i)).strftime('%Y-%m-%d'): 0 for i in range(30)}
+
+    # Update the dictionary with actual points
+    cumulative_points = 0
+    for date, points in daily_points:
+        cumulative_points += points
+        # Handle both string and datetime objects
+        date_key = date if isinstance(date, str) else date.strftime('%Y-%m-%d')
+        date_range[date_key] = cumulative_points
+
+    # Convert to list of dictionaries for JSON serialization
+    chart_data = [{"date": date, "points": points} for date, points in date_range.items()]
+
+    return jsonify(chart_data)
 
 def get_total_points():
     total_points = db.session.query(db.func.sum(Completed.reward)).scalar() or 0

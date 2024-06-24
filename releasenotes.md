@@ -1,5 +1,9 @@
 # releasenotes
 
+## 0.2
+- chart
+- some caoimhe rebranding
+
 ## 0.1
 - basic insert task/complete task functionality
 - recurring task status should not be changed to "completed"
