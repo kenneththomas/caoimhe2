@@ -1,5 +1,8 @@
 # releasenotes
 
+## 0.2.2
+- add delete button
+
 ## 0.2.1
 - more caoimhe rebranding
 - use local time instead of utc

@@ -122,6 +122,13 @@ def point_balance_data():
 
     return jsonify(chart_data)
 
+@app.route('/delete/<int:task_id>')
+def delete_task(task_id):
+    task = Bounties.query.get_or_404(task_id)
+    db.session.delete(task)
+    db.session.commit()
+    return redirect(url_for('index'))
+
 def get_total_points():
     total_points = db.session.query(db.func.sum(Completed.reward)).scalar() or 0
     return total_points

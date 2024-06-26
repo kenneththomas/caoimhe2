@@ -63,3 +63,14 @@ footer {
     background-color: #f0f0f0;
     color: #333;
 }
+.task-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+}
+.delete-btn {
+    color: red;
+    cursor: pointer;
+    margin-left: 10px;
+}
