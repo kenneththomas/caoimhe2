@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Caoimhe Task Manager</title>
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='default.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-date-fns"></script>
     <script src="{{ url_for('static', filename='pbd.js') }}"></script>
@@ -13,53 +14,67 @@
     <header>
         <!--img src="{{ url_for('static', filename='images/logo1.png') }}" alt="Caoimhe Logo"-->
     </header>
-    <h1>Caoimhe Dashboard</h1>
-    <h2>Total Points: {{ total_points }}</h2>
-    <a href="/completed">View Completed Tasks</a>
-    <form action="/add" method="post">
-        <input type="text" name="task" placeholder="Task Description" required>
-        <input type="number" name="reward" placeholder="Reward Points" required>
-        <input type="date" name="expiration_date" placeholder="Expiration Date (optional)">
-        <select name="task_type">
-            <option value="single">Single</option>
-            <option value="recurring">Recurring</option>
-        </select>
-        <button type="submit">Add Task</button>
-    </form>
-    <h3>Add Completed Task</h3>
-    <form action="/add-completed" method="post">
-        <input type="text" name="task" placeholder="Task Description" required>
-        <input type="number" name="reward" placeholder="Reward Points" required>
-        <button type="submit">Add Completed Task</button>
-    </form>
-    <h3>Recurring Tasks</h3>
-    <ul>
-        {% for bounty in recurring_bounties %}
-        <li>
-            {{ bounty.task }} ({{ bounty.reward }} Points) - 
-            <a href="/complete/{{ bounty.id }}">Complete</a>
-            <a href="/delete/{{ bounty.id }}" class="delete-btn" onclick="return confirm('Are you sure you want to delete this task?')">❌</a>
-        </li>
-        {% endfor %}
-    </ul>
+    
+    <div class="main-container">
+        <div class="content-container">
+            <h1>Caoimhe Dashboard</h1>
+            <h2>Total Points: {{ total_points }}</h2>
+            <a href="/completed">View Completed Tasks</a>
+            
+            <form action="/add" method="post">
+                <h3>Add New Task</h3>
+                <input type="text" name="task" placeholder="Task Description" required>
+                <input type="number" name="reward" placeholder="Reward Points" required>
+                <input type="date" name="expiration_date" placeholder="Expiration Date (optional)">
+                <select name="task_type">
+                    <option value="single">Single</option>
+                    <option value="recurring">Recurring</option>
+                </select>
+                <button type="submit">Add Task</button>
+            </form>
+            
+            <form action="/add-completed" method="post">
+                <h3>Add Completed Task</h3>
+                <input type="text" name="task" placeholder="Task Description" required>
+                <input type="number" name="reward" placeholder="Reward Points" required>
+                <button type="submit">Add Completed Task</button>
+            </form>
+            
+            <h3>Recurring Tasks</h3>
+            <ul>
+                {% for bounty in recurring_bounties %}
+                <li class="task-item">
+                    <span>{{ bounty.task }} ({{ bounty.reward }} Points)</span>
+                    <span>
+                        <a href="/complete/{{ bounty.id }}">Complete</a>
+                        <a href="/delete/{{ bounty.id }}" class="delete-btn" onclick="return confirm('Are you sure you want to delete this task?')">❌</a>
+                    </span>
+                </li>
+                {% endfor %}
+            </ul>
 
-    <h3>Single Tasks</h3>
-    <ul>
-        {% for bounty in single_bounties %}
-        <li>
-            {{ bounty.task }} ({{ bounty.reward }} Points) - 
-            <a href="/complete/{{ bounty.id }}">Complete</a>
-            <a href="/delete/{{ bounty.id }}" class="delete-btn" onclick="return confirm('Are you sure you want to delete this task?')">❌</a>
-        </li>
-        {% endfor %}
-    </ul>
+            <h3>Single Tasks</h3>
+            <ul>
+                {% for bounty in single_bounties %}
+                <li class="task-item">
+                    <span>{{ bounty.task }} ({{ bounty.reward }} Points)</span>
+                    <span>
+                        <a href="/complete/{{ bounty.id }}">Complete</a>
+                        <a href="/delete/{{ bounty.id }}" class="delete-btn" onclick="return confirm('Are you sure you want to delete this task?')">❌</a>
+                    </span>
+                </li>
+                {% endfor %}
+            </ul>
 
-    <div>
-        <h3>Point Balance Chart</h3>
-        <canvas id="pointBalanceChart" width="400" height="200"></canvas>
+            <div>
+                <h3>Point Balance Chart</h3>
+                <canvas id="pointBalanceChart" width="400" height="200"></canvas>
+            </div>
+        </div>
     </div>
+
+    <footer>
+        <small>Caoimhe 0.2.2</small>
+    </footer>
 </body>
-<footer>
-    <small>Caoimhe 0.2.2</small>
-</footer>
 </html>

@@ -2,6 +2,7 @@
 
 ## 0.2.2
 - add delete button
+- unwidening and other aesthetic stuff
 
 ## 0.2.1
 - more caoimhe rebranding

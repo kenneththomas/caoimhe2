@@ -1,76 +1,172 @@
+/* Base styles */
 body {
-    font-family: 'Arial', sans-serif;
-    background-color: #f4f4f9;
+    font-family: 'Roboto', 'Arial', sans-serif;
+    background-color: #f0f4f8;
     margin: 0;
-    padding: 20px;
+    padding: 0;
     color: #333;
+    line-height: 1.6;
 }
+
+/* Main container for centering content */
+.main-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+/* Content container */
+.content-container {
+    max-width: 800px;
+    margin: 0 auto;
+    background-color: white;
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+
+/* Header styles */
 header {
-    background: #005f73;
-    padding: 10px 20px;
-    text-align: center;
+    background: linear-gradient(to right, #005f73, #0a9396);
+    padding: 15px 0;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
 }
+
 header img {
-    max-height: 50px;
+    max-height: 60px;
+    display: block;
+    margin: 0 auto;
 }
+
+/* Typography */
 h1, h2, h3 {
     color: #023047;
+    margin-bottom: 20px;
 }
+
+h1 { font-size: 2.5em; }
+h2 { font-size: 2em; }
+h3 { font-size: 1.5em; }
+
 a {
     color: #fb8500;
+    text-decoration: none;
+    transition: color 0.3s ease;
 }
+
+a:hover {
+    color: #ffb703;
+}
+
+/* Form styles */
 form {
-    margin-top: 20px;
-    background: white;
-    padding: 20px;
+    background: #f8f9fa;
+    padding: 25px;
     border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+    margin-bottom: 30px;
 }
-input[type="text"], input[type="number"], input[type="date"], select {
-    padding: 10px;
-    margin-top: 5px;
-    margin-bottom: 10px;
-    display: block;
-    width: 95%;
+
+input[type="text"], 
+input[type="number"], 
+input[type="date"], 
+select {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 15px;
     border: 1px solid #ccc;
     border-radius: 4px;
+    font-size: 16px;
+    transition: border-color 0.3s ease;
+    box-sizing: border-box;
 }
+
+input[type="text"]:focus, 
+input[type="number"]:focus, 
+input[type="date"]:focus, 
+select:focus {
+    border-color: #219ebc;
+    outline: none;
+}
+
 button {
     background-color: #219ebc;
     color: white;
-    padding: 10px 15px;
+    padding: 12px 20px;
     border: none;
     border-radius: 5px;
     cursor: pointer;
-    width: 100%;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
 }
+
 button:hover {
     background-color: #023047;
 }
+
+/* List styles */
 ul {
     list-style-type: none;
     padding: 0;
 }
+
 li {
-    background: white;
-    margin-top: 5px;
-    padding: 10px;
+    background: #f8f9fa;
+    margin-bottom: 10px;
+    padding: 15px;
     border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+    transition: transform 0.2s ease;
 }
-footer {
-    text-align: center;
-    padding: 20px 0;
-    margin-top: 20px;
-    background-color: #f0f0f0;
-    color: #333;
+
+li:hover {
+    transform: translateY(-2px);
 }
+
+/* Task item styles */
 .task-item {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 10px;
 }
+
 .delete-btn {
-    color: red;
+    color: #e63946;
     cursor: pointer;
-    margin-left: 10px;
+    margin-left: 15px;
+    font-size: 1.2em;
+    transition: color 0.3s ease;
+}
+
+.delete-btn:hover {
+    color: #d00000;
+}
+
+/* Footer styles */
+footer {
+    text-align: center;
+    padding: 20px 0;
+    background-color: #023047;
+    color: #fff;
+    margin-top: 40px;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+    .main-container {
+        padding: 10px;
+    }
+    
+    .content-container {
+        padding: 20px;
+    }
+    
+    form {
+        padding: 15px;
+    }
+    
+    h1 { font-size: 2em; }
+    h2 { font-size: 1.7em; }
+    h3 { font-size: 1.3em; }
 }
