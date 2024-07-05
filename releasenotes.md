@@ -1,5 +1,9 @@
 # releasenotes
 
+## 0.2.3
+- usability improvement, move the ad-hoc completed tasks bar on top
+- add css to other pages
+
 ## 0.2.2
 - add delete button
 - unwidening and other aesthetic stuff

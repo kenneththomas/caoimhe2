@@ -20,6 +20,13 @@
             <h1>Caoimhe Dashboard</h1>
             <h2>Total Points: {{ total_points }}</h2>
             <a href="/completed">View Completed Tasks</a>
+
+            <form action="/add-completed" method="post">
+                <h3>Add Completed Task</h3>
+                <input type="text" name="task" placeholder="Task Description" required>
+                <input type="number" name="reward" placeholder="Reward Points" required>
+                <button type="submit">Add Completed Task</button>
+            </form>
             
             <form action="/add" method="post">
                 <h3>Add New Task</h3>
@@ -31,13 +38,6 @@
                     <option value="recurring">Recurring</option>
                 </select>
                 <button type="submit">Add Task</button>
-            </form>
-            
-            <form action="/add-completed" method="post">
-                <h3>Add Completed Task</h3>
-                <input type="text" name="task" placeholder="Task Description" required>
-                <input type="number" name="reward" placeholder="Reward Points" required>
-                <button type="submit">Add Completed Task</button>
             </form>
             
             <h3>Recurring Tasks</h3>
