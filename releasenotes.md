@@ -1,5 +1,8 @@
 # releasenotes
 
+## 0.2.4
+- bugfix: days with no point updates should not reset to zero
+
 ## 0.2.3
 - usability improvement, move the ad-hoc completed tasks bar on top
 - add css to other pages

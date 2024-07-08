@@ -106,16 +106,20 @@ def point_balance_data():
         func.sum(Completed.reward).label('points')
     ).filter(Completed.complete_date >= start_date).group_by(func.date(Completed.complete_date)).all()
 
-    # Create a dictionary with all dates and initialize points to 0
-    date_range = {(start_date + timedelta(days=i)).strftime('%Y-%m-%d'): 0 for i in range(30)}
+    # Create a dictionary with all dates
+    date_range = {(start_date + timedelta(days=i)).strftime('%Y-%m-%d'): None for i in range(30)}
 
     # Update the dictionary with actual points
-    cumulative_points = 0
     for date, points in daily_points:
-        cumulative_points += points
-        # Handle both string and datetime objects
-        date_key = date if isinstance(date, str) else date.strftime('%Y-%m-%d')
-        date_range[date_key] = cumulative_points
+        date_key = date.strftime('%Y-%m-%d') if isinstance(date, datetime) else date
+        date_range[date_key] = points
+
+    # Calculate cumulative points
+    cumulative_points = 0
+    for date in sorted(date_range.keys()):
+        if date_range[date] is not None:
+            cumulative_points += date_range[date]
+        date_range[date] = cumulative_points
 
     # Convert to list of dictionaries for JSON serialization
     chart_data = [{"date": date, "points": points} for date, points in date_range.items()]
