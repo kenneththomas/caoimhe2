@@ -43,9 +43,12 @@ def add_task():
     
     new_task = Bounties(task=task, reward=int(reward), expiration_date=expiration_date, task_type=task_type, status='pending')
     db.session.add(new_task)
+    
+    # Add 1 point for creating a to-do item
+    add_points_for_creating_task()
+    
     db.session.commit()
     return redirect(url_for('index'))
-
 @app.route('/complete/<int:task_id>')
 def complete_task(task_id):
     task = Bounties.query.get(task_id)
@@ -136,6 +139,10 @@ def delete_task(task_id):
 def get_total_points():
     total_points = db.session.query(db.func.sum(Completed.reward)).scalar() or 0
     return total_points
+
+def add_points_for_creating_task():
+    task_creation_points = Completed(task="Created a to-do item", reward=2)
+    db.session.add(task_creation_points)
 
 if __name__ == "__main__":
     with app.app_context():

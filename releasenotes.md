@@ -1,5 +1,8 @@
 # releasenotes
 
+## 0.2.5
+- give points for planning a task, 2 for now but will probably adjust later
+
 ## 0.2.4
 - bugfix: days with no point updates should not reset to zero
 
